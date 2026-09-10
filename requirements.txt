@@ -3,8 +3,11 @@ numpy
 scikit-learn
 matplotlib
 seaborn
-flask
+fastapi
+pydantic
+uvicorn
 xgboost
+lightgbm
 joblib
 streamlit
 -e .

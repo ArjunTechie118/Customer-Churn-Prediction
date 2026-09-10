@@ -1,11 +1,40 @@
-from fastapi import FastAPI
-from fastapi.responses import JSONResponse
-from typing import Literal,Optional
-from pydantic import BaseModel,Field,computed_field
-import joblib
+from fastapi import FastAPI, HTTPException
+from src.schemas import UserInput, PredictionResponse
+from src.schemas import UserInput
+from src.prediction import predict_churn
+from src.logger import logger
 
-#load model
-model = joblib.load("src/churn_xgb_pipeline.pkl")
 
-app = FastAPI()
+app = FastAPI(
+    title="Customer Churn Prediction API",
+    description="API for predicting customer churn using a trained LightGBM model.",
+    version="1.0.0"
+)
 
+
+@app.get("/")
+def home():
+    return {
+        "message": "Welcome to my Customer Churn Prediction project"
+    }
+
+
+@app.post("/predict",response_model=PredictionResponse)
+def predict(data: UserInput):
+
+    logger.info("Prediction request received")
+
+    try:
+        input_data = data.model_dump(by_alias=True)
+
+        result = predict_churn(input_data)
+
+        return result
+
+    except Exception:
+        logger.exception("Prediction failed")
+
+        raise HTTPException(
+            status_code=500,
+            detail="An error occurred while making the prediction."
+        )

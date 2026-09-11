@@ -18,6 +18,11 @@ def home():
         "message": "Welcome to my Customer Churn Prediction project"
     }
 
+@app.get("/health")
+def health_check():
+    return {
+        "status": "healthy"
+    }
 
 @app.post("/predict",response_model=PredictionResponse)
 def predict(data: UserInput):

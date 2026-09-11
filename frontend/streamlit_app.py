@@ -17,8 +17,10 @@ st.set_page_config(
 # THEME STATE
 # =========================================================
 
-if "dark_mode" not in st.session_state:
-    st.session_state.dark_mode = True
+if "theme_toggle" not in st.session_state:
+    st.session_state.theme_toggle = True
+
+st.session_state.dark_mode = st.session_state.theme_toggle
 
 
 # =========================================================
@@ -494,17 +496,13 @@ with divider_col:
 
 with theme_col:
 
-    theme_changed = st.toggle(
+    st.toggle(
         "Theme",
-        value=st.session_state.dark_mode,
+        key="theme_toggle",
         label_visibility="collapsed"
     )
 
-    if theme_changed != st.session_state.dark_mode:
-
-        st.session_state.dark_mode = theme_changed
-
-        st.rerun()
+    st.session_state.dark_mode = st.session_state.theme_toggle
 
 
 # =========================================================

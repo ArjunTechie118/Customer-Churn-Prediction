@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 
+API_URL = st.secrets["API_URL"]
 
 st.title("📊 Customer Churn Prediction")
 
@@ -127,10 +128,9 @@ if submitted:
     try:
 
         response = requests.post(
-            "http://127.0.0.1:8000/predict",
+            f"{API_URL}/predict",
             json=payload
         )
-
         if response.status_code == 200:
 
             result = response.json()

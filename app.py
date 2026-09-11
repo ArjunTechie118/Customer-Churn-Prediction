@@ -1,6 +1,5 @@
 from fastapi import FastAPI, HTTPException
 from src.schemas import UserInput, PredictionResponse
-from src.schemas import UserInput
 from src.prediction import predict_churn
 from src.logger import logger
 

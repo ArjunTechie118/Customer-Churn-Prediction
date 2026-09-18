@@ -255,6 +255,7 @@ st.markdown(
             font-size: 11px;
         }}
     }}
+ 
     </style>
     """,
     unsafe_allow_html=True

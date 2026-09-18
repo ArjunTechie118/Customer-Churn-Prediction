@@ -4,6 +4,7 @@ import requests
 # =========================================================
 # PAGE CONFIGURATION
 # =========================================================
+
 st.set_page_config(
     page_title="ChurnIQ - Predict Churn",
     page_icon="🎯",
@@ -14,11 +15,12 @@ st.set_page_config(
 # =========================================================
 # API CONFIGURATION
 # =========================================================
-API_URL="https://customer-churn-prediction-api-gsqc.onrender.com/predict"
 
+API_URL="https://customer-churn-prediction-api-gsqc.onrender.com/predict"
 # =========================================================
 # THEME
 # =========================================================
+
 if "dark_mode" not in st.session_state:
     st.session_state.dark_mode=True
 
@@ -45,9 +47,11 @@ accent_light="#60A5FA"
 # =========================================================
 # CSS
 # =========================================================
+
 st.markdown(
     f"""
     <style>
+
     :root {{
         --bg-color:{bg_color};
         --card-color:{card_color};
@@ -61,7 +65,7 @@ st.markdown(
     }}
 
     .stApp {{
-        background-color:{bg_color};
+        background-color:var(--bg-color);
         color:var(--text-color);
     }}
 
@@ -72,7 +76,10 @@ st.markdown(
         padding-bottom:4rem;
     }}
 
-    /* PAGE HEADER */
+    /* =================================================
+       PAGE HEADER
+       ================================================= */
+
     .page-header {{
         margin-top:15px;
         margin-bottom:35px;
@@ -109,7 +116,10 @@ st.markdown(
         margin-top:12px;
     }}
 
-    /* FORM CARDS */
+    /* =================================================
+       FORM CARDS
+       ================================================= */
+
     .form-card {{
         background:var(--card-color);
         border:1px solid var(--border-color);
@@ -138,7 +148,10 @@ st.markdown(
         margin-bottom:22px;
     }}
 
-    /* STREAMLIT INPUTS */
+    /* =================================================
+       STREAMLIT INPUTS
+       ================================================= */
+
     div[data-baseweb="select"] > div {{
         background-color:var(--input-color)!important;
         border-color:var(--border-color)!important;
@@ -154,7 +167,10 @@ st.markdown(
         color:var(--text-color)!important;
     }}
 
-    /* PREDICT BUTTON */
+    /* =================================================
+       PREDICT BUTTON
+       ================================================= */
+
     div.stButton > button[kind="primary"] {{
         background-color:#2563EB!important;
         color:#FFFFFF!important;
@@ -173,76 +189,269 @@ st.markdown(
         transform:translateY(-2px);
     }}
 
-    /* RESULT */
-    .result-card {{
+    /* =================================================
+       RISK ANALYSIS
+       ================================================= */
+
+    .risk-analysis {{
         background:var(--card-color);
         border:1px solid var(--border-color);
-        border-radius:20px;
-        padding:30px;
-        margin-top:30px;
+        border-radius:18px;
+        padding:28px;
+        margin-top:25px;
+        min-height:0px;
+        padding-bottom:120px;
+    }}
+
+    .risk-analysis-title {{
+        font-size:26px;
+        font-weight:800;
+        color:var(--text-color);
+        margin-bottom:5px;
+    }}
+
+    .risk-analysis-subtitle {{
+        font-size:14px;
+        color:var(--muted-color);
+        margin-bottom:10px;
+    }}
+
+    .gauge-container {{
+        position:relative;
+        width:100%;
+        max-width:480px;
+        height:270px;
+        margin:5px auto 0 auto;
+    }}
+
+    .gauge-arc {{
+        position:absolute;
+        left:50%;
+        bottom:35px;
+        transform:translateX(-50%);
+        width:360px;
+        height:190px;
+        border-radius:390px 390px 0 0;
+        background:conic-gradient(
+            from 270deg,
+            #22C55E 0deg 54deg,
+            #84CC16 54deg 90deg,
+            #FACC15 90deg 135deg,
+            #F59E0B 135deg 162deg,
+            #EF4444 162deg 180deg,
+            transparent 180deg 360deg
+        );
+    }}
+    .gauge-risk-labels{{
+        position:absolute;
+        left:50%;
+        top:15px;
+        transform:translateX(-50%);
+        width:430px;
+        height:70px;
+        z-index:8;
+        pointer-events:none;
+    }}
+
+    .gauge-risk-low{{
+        position:absolute;
+        left:5px;
+        top:30px;
+        color:#22C55E;
+        font-size:15px;
+        font-weight:800;
+    }}
+
+    .gauge-risk-medium{{
+        position:absolute;
+        left:50%;
+        top:0;
+        transform:translateX(-50%);
+        color:#FACC15;
+        font-size:15px;
+        font-weight:800;
+        white-space:nowrap;
+    }}
+
+    .gauge-risk-high{{
+        position:absolute;
+        right:0;
+        top:30px;
+        color:#EF4444;
+        font-size:15px;
+        font-weight:800;
+    }}
+
+    .gauge-inner {{
+        position:absolute;
+        left:50%;
+        bottom:35px;
+        transform:translateX(-50%);
+        width:335px;
+        height:168px;
+        border-radius:335px 335px 0 0;
+        background:var(--card-color);
+    }}
+
+    .gauge-needle{{
+        position:absolute;
+        left:50%;
+        bottom:38px;
+        width:5px;
+        height:125px;
+        background:var(--text-color);
+        border-radius:5px;
+        transform-origin:50% 100%;
+        transform:translateX(-50%) rotate(var(--needle-angle));
+        z-index:5;
+    }}
+
+    .gauge-center {{
+        position:absolute;
+        left:50%;
+        bottom:27px;
+        transform:translateX(-50%);
+        width:32px;
+        height:32px;
+        border-radius:50%;
+        background:#2563EB;
+        border:6px solid var(--card-color);
+        z-index:6;
+        box-shadow:0 0 15px rgba(37,99,235,.45);
+    }}
+
+    .gauge-value {{
+        position:absolute;
+        left:50%;
+        bottom:-55px;
+        transform:translateX(-50%);
+        font-size:36px;
+        font-weight:800;
+        color:#60A5FA;
+        z-index:7;
+        white-space:nowrap;
+    }}
+
+    .gauge-label {{
+        position:absolute;
+        left:50%;
+        bottom:-82px;
+        transform:translateX(-50%);
+        font-size:14px;
+        color:var(--muted-color);
+        z-index:7;
+        white-space:nowrap;
+    }}
+
+    .gauge-min {{
+        position:absolute;
+        left:28px;
+        bottom:20px;
+        font-size:13px;
+        color:var(--muted-color);
+    }}
+
+    .gauge-max {{
+        position:absolute;
+        right:28px;
+        bottom:20px;
+        font-size:13px;
+        color:var(--muted-color);
+    }}
+        .probability-display{{
+        text-align:center;
+        margin-top:-5px;
+        margin-bottom:25px;
+    }}
+
+    .probability-value{{
+        font-size:36px;
+        font-weight:800;
+        color:#60A5FA;
+        line-height:1.1;
+    }}
+
+    .probability-label{{
+        font-size:14px;
+        color:var(--muted-color);
+        margin-top:5px;
+    }}
+    /* =================================================
+       RESULT BOXES
+       ================================================= */
+
+    .result-grid {{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:15px;
+        margin-top:5px;
+    }}
+
+    .result-box {{
+        background:var(--input-color);
+        border:1px solid var(--border-color);
+        border-radius:14px;
+        padding:18px 20px;
+        min-height:82px;
     }}
 
     .result-label {{
+        font-size:11px;
         color:var(--muted-color)!important;
-        font-size:13px;
-        font-weight:700;
-        letter-spacing:.08em;
+        margin-bottom:8px;
         text-transform:uppercase;
+        letter-spacing:1px;
+        font-weight:700;
     }}
 
     .result-value {{
-        color:var(--text-color)!important;
-        font-size:32px;
+        font-size:22px;
         font-weight:800;
-        margin-top:8px;
-    }}
-
-    .risk-high {{
-        display:inline-block;
-        background:rgba(239,68,68,.12);
-        color:#F87171;
-        border:1px solid rgba(239,68,68,.25);
-        padding:8px 16px;
-        border-radius:999px;
-        font-weight:700;
-        margin-top:12px;
-    }}
-
-    .risk-medium {{
-        display:inline-block;
-        background:rgba(245,158,11,.12);
-        color:#FBBF24;
-        border:1px solid rgba(245,158,11,.25);
-        padding:8px 16px;
-        border-radius:999px;
-        font-weight:700;
-        margin-top:12px;
+        color:var(--text-color)!important;
     }}
 
     .risk-low {{
         display:inline-block;
-        background:rgba(34,197,94,.12);
-        color:#4ADE80;
-        border:1px solid rgba(34,197,94,.25);
-        padding:8px 16px;
+        padding:6px 13px;
         border-radius:999px;
-        font-weight:700;
-        margin-top:12px;
+        background:rgba(34,197,94,.15);
+        color:#22C55E;
+        border:1px solid rgba(34,197,94,.35);
+        font-size:13px;
+        font-weight:800;
     }}
 
-    .probability {{
-        font-size:52px;
-        font-weight:850;
-        color:#60A5FA!important;
-        line-height:1;
-        margin:12px 0;
+    .risk-medium {{
+        display:inline-block;
+        padding:6px 13px;
+        border-radius:999px;
+        background:rgba(250,204,21,.15);
+        color:#FACC15;
+        border:1px solid rgba(250,204,21,.35);
+        font-size:13px;
+        font-weight:800;
+    }}
+
+    .risk-high {{
+        display:inline-block;
+        padding:6px 13px;
+        border-radius:999px;
+        background:rgba(239,68,68,.15);
+        color:#EF4444;
+        border:1px solid rgba(239,68,68,.35);
+        font-size:13px;
+        font-weight:800;
     }}
 
     .result-note {{
+        margin-top:15px;
+        padding:16px;
+        border-radius:12px;
+        background:var(--input-color);
+        border:1px solid var(--border-color);
         color:var(--muted-color)!important;
-        font-size:14px;
+        font-size:13px;
         line-height:1.6;
-        margin-top:14px;
     }}
 
     @media(max-width:900px) {{
@@ -254,7 +463,12 @@ st.markdown(
         .page-title {{
             font-size:34px;
         }}
+
+        .result-grid {{
+            grid-template-columns:1fr;
+        }}
     }}
+
     </style>
     """,
     unsafe_allow_html=True
@@ -263,6 +477,7 @@ st.markdown(
 # =========================================================
 # HEADER
 # =========================================================
+
 st.markdown(
     """
     <div class="page-header">
@@ -282,6 +497,7 @@ st.markdown(
 # =========================================================
 # CUSTOMER PROFILE
 # =========================================================
+
 st.markdown(
     """
     <div class="form-card">
@@ -318,6 +534,7 @@ st.markdown("</div>",unsafe_allow_html=True)
 # =========================================================
 # SERVICE INFORMATION
 # =========================================================
+
 st.markdown(
     """
     <div class="form-card">
@@ -368,6 +585,7 @@ st.markdown("</div>",unsafe_allow_html=True)
 # =========================================================
 # CONTRACT & BILLING
 # =========================================================
+
 st.markdown(
     """
     <div class="form-card">
@@ -434,8 +652,9 @@ total_charges=st.number_input(
 st.markdown("</div>",unsafe_allow_html=True)
 
 # =========================================================
-# PREDICT
+# PREDICT BUTTON
 # =========================================================
+
 st.markdown("<br>",unsafe_allow_html=True)
 
 col1,col2,col3=st.columns([1,1.4,1])
@@ -450,6 +669,7 @@ with col2:
 # =========================================================
 # API PREDICTION
 # =========================================================
+
 if predict_button:
 
     payload={
@@ -472,6 +692,7 @@ if predict_button:
     with st.spinner("Analyzing customer risk..."):
 
         try:
+
             response=requests.post(
                 API_URL,
                 json=payload,
@@ -484,17 +705,23 @@ if predict_button:
 
                 prediction=result["prediction"]
                 probability=float(result["churn_probability"])
-
                 percentage=probability*100
 
+                # =================================================
+                # RISK LEVEL
+                # =================================================
+
                 if prediction=="Churn":
+
                     if percentage>=70:
                         risk_level="HIGH RISK"
                         risk_class="risk-high"
                     else:
                         risk_level="MEDIUM RISK"
                         risk_class="risk-medium"
+
                 else:
+
                     if percentage<30:
                         risk_level="LOW RISK"
                         risk_class="risk-low"
@@ -503,37 +730,74 @@ if predict_button:
                         risk_class="risk-medium"
 
                 # =================================================
+                # GAUGE
+                # =================================================
+
+                needle_angle=-90+(percentage/100)*180
+
+                # =================================================
                 # RESULT
                 # =================================================
-                st.markdown(
-                    f"""
-                    <div class="probability">
-                        {percentage:.1f}%
+
+                result_html=f"""
+                <div class="risk-analysis">
+                    <div class="risk-analysis-title">Customer Risk Analysis</div>
+                    <div class="risk-analysis-subtitle">
+                        Churn prediction for the given customer
                     </div>
 
-                    <div class="result-label">
-                        Prediction
+                    <div class="gauge-container">
+                        <div class="gauge-risk-labels">
+                        <div class="gauge-risk-low">Low Risk</div>
+                        <div class="gauge-risk-medium">Medium Risk</div>
+                        <div class="gauge-risk-high">High Risk</div>
+                        </div>
+
+                        <div class="gauge-arc"></div>
+                        <div class="gauge-inner"></div>
+                        <div class="gauge-needle" style="--needle-angle:{needle_angle}deg;"></div>
+                        <div class="gauge-center"></div>
+                        <div class="gauge-min">0%</div>
+                        <div class="gauge-max">100%</div>
+                        </div>
+
+                    <div class="probability-display">
+                        <div class="probability-value">{percentage:.1f}%</div>
+                        <div class="probability-label">Churn Probability</div>
                     </div>
 
-                    <div class="result-value">
-                        {prediction}
-                    </div>
+                    <div class="result-grid">
+                        <div class="result-box">
+                            <div class="result-label">Prediction</div>
+                            <div class="result-value">{prediction}</div>
+                        </div>
 
-                    <div class="{risk_class}">
-                        {risk_level}
+                        <div class="result-box">
+                            <div class="result-label">Risk Level</div>
+                            <div class="{risk_class}">{risk_level}</div>
+                        </div>
                     </div>
 
                     <div class="result-note">
-                        This prediction is generated by the trained
-                        LightGBM model through the ChurnIQ FastAPI backend.
-                        Explainability will be added through SHAP in the
-                        next stage of the project.
+                        This prediction is generated by the trained LightGBM model through the
+                        ChurnIQ FastAPI backend. Explainability will be added through SHAP
+                        in the next stage of the project.
                     </div>
-                    """,
-                    unsafe_allow_html=True
-                )
+                </div>
+                """
+                st.html(result_html+"""
+                <script>
+                setTimeout(function(){
+                    window.scrollTo({
+                        top:document.body.scrollHeight,
+                        behavior:"smooth"
+                    });
+                },300);
+                </script>
+                """)
 
             else:
+
                 st.error(
                     f"Prediction request failed. API returned status code {response.status_code}."
                 )
@@ -544,15 +808,18 @@ if predict_button:
                     st.write(response.text)
 
         except requests.exceptions.Timeout:
+
             st.error(
                 "The prediction service took too long to respond. Please try again."
             )
 
         except requests.exceptions.ConnectionError:
+
             st.error(
                 "Could not connect to the FastAPI prediction service. "
                 "Please check that the API is running and the API URL is correct."
             )
 
         except Exception as e:
+
             st.error(f"Something went wrong: {e}")

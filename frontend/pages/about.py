@@ -600,12 +600,6 @@ st.html(
     </div>
     """
 )
-st.html("""
-<div class="connect-links">
-<a href="mailto:arjun.dadhich004@gmail.com">Email</a>
-<a href="https://www.linkedin.com/in/arjun-dadhich" target="_blank">LinkedIn</a>
-</div>
-""")
 # =========================================================
 # WHY CHURNIQ
 # =========================================================

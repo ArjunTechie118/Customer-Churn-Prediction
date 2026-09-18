@@ -535,13 +535,9 @@ st.html(
         </div>
 
         <p class="about-description">
-            I'm a Computer Science & Engineering student focused on
-            Machine Learning and Artificial Intelligence. I enjoy building
-            practical ML applications that go beyond model training and
-            turn machine learning models into usable products.
-            ChurnIQ is one of my deployed projects, combining machine
-            learning, API development, frontend development and deployment
-            into an end-to-end application.
+            I’m an aspiring AI/ML Engineer passionate about building practical, end-to-end machine learning products that go beyond just model training.
+
+            I enjoy turning ML models into real, usable applications that solve practical business problems. I built ChurnIQ with this approach to explore how machine learning can be applied to customer churn and transformed into a complete deployed solution by combining machine learning, API development, frontend development, and deployment. In the future, I plan to extend ChurnIQ with LLM and RAG capabilities to generate personalized, context-aware customer retention recommendations based on relevant business policies and guidelines.
         </p>
 
         <a

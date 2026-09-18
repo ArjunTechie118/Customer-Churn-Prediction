@@ -50,7 +50,33 @@ st.markdown(textwrap.dedent("""
 .built-grid{display:grid;grid-template-columns:repeat(4,1fr);border-radius:12px;overflow:hidden}
 .tech-item{text-align:center;padding:10px 18px;border-right:1px solid var(--border-color,#dbeafe)}
 .tech-item:last-child{border-right:none}
-.tech-icon{font-size:34px;margin-bottom:5px}
+.tech-icon{
+    height:70px;
+    margin-bottom:5px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+.tech-icon img{
+    width:58px !important;
+    height:58px !important;
+    max-width:58px !important;
+    max-height:58px !important;
+    object-fit:contain;
+}
+.tech-item:nth-child(3) .tech-icon img{
+    width:105px !important;
+    height:58px !important;
+    max-width:105px !important;
+    max-height:58px !important;
+    object-fit:contain;
+}
+.tech-item h3,
+.tech-item p{
+    text-align:center;
+}
 .tech-item h3{margin:0 0 4px;color:var(--text-color,#0f172a);font-size:14px}
 .tech-item p{margin:0;color:var(--muted-color,#64748b);font-size:11px}
 .roadmap{margin-top:42px;padding:24px 28px;border-radius:12px;background:linear-gradient(120deg,#172f54,#10264a);color:#fff;display:grid;grid-template-columns:1.05fr 1fr;gap:35px;box-sizing:border-box}
@@ -162,34 +188,69 @@ st.markdown("""
 </div>
 </div>
 """,unsafe_allow_html=True)
-st.markdown("""
+
+import base64
+from pathlib import Path
+
+
+ASSETS_DIR = Path(__file__).resolve().parents[1] / "assets"
+
+
+def get_svg_data(filename):
+    file_path = ASSETS_DIR / filename
+    svg_data = file_path.read_bytes()
+    encoded = base64.b64encode(svg_data).decode("utf-8")
+    return f"data:image/svg+xml;base64,{encoded}"
+
+
+python_logo = get_svg_data("python.svg")
+lightgbm_logo = get_svg_data("lightgbm.svg")
+fastapi_logo = get_svg_data("fastapi.svg")
+streamlit_logo = get_svg_data("streamlit.svg")
+
+
+st.markdown(f"""
 <div class="section-heading">
 <h2>Built With</h2>
 <p>Modern, reliable and industry-standard tools.</p>
 </div>
+
 <div class="built-grid">
+
 <div class="tech-item">
-<div class="tech-icon">🐍</div>
+<div class="tech-icon">
+<img src="{python_logo}" alt="Python">
+</div>
 <h3>Python</h3>
 <p>Core programming language</p>
 </div>
+
 <div class="tech-item">
-<div class="tech-icon">⚡</div>
+<div class="tech-icon">
+<img src="{lightgbm_logo}" alt="LightGBM">
+</div>
 <h3>LightGBM</h3>
 <p>Machine learning model</p>
 </div>
+
 <div class="tech-item">
-<div class="tech-icon">🚀</div>
+<div class="tech-icon">
+<img src="{fastapi_logo}" alt="FastAPI">
+</div>
 <h3>FastAPI</h3>
 <p>High-performance API</p>
 </div>
+
 <div class="tech-item">
-<div class="tech-icon">🎨</div>
+<div class="tech-icon">
+<img src="{streamlit_logo}" alt="Streamlit">
+</div>
 <h3>Streamlit</h3>
 <p>Interactive web interface</p>
 </div>
+
 </div>
-""",unsafe_allow_html=True)
+""", unsafe_allow_html=True)
 st.markdown("""
 <div class="roadmap">
 <div>

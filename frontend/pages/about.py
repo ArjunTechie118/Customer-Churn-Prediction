@@ -577,10 +577,10 @@ st.html(
                 <div class="github-links">
             <a
                 class="github-button"
-                href="https://github.com/ArjunTechie118/Customer-Churn-Prediction"
+                href="https://github.com/ArjunTechie118"
                 target="_blank"
             >
-                View Project on GitHub ↗
+                My GitHub ↗
             </a>
             <a
                 class="github-button secondary-link"

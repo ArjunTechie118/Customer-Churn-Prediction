@@ -69,7 +69,31 @@ st.markdown(
         padding-right:4rem;
         padding-bottom:5rem;
     }}
-
+    .connect-links{{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        gap:12px;
+        margin-top:22px;
+        flex-wrap:wrap;
+        }}
+    .connect-links a{{
+        color:var(--text-color)!important;
+        text-decoration:none!important;
+        font-size:14px;
+        font-weight:600;
+        padding:9px 16px;
+        border:1px solid var(--border-color);
+        border-radius:9px;
+        background:var(--card-bg);
+        transition:all .2s ease;
+    }}
+    .connect-links a:hover{{
+        color:#60A5FA!important;
+        border-color:#60A5FA;
+        transform:translateY(-2px);
+        box-shadow:0 6px 18px rgba(37,99,235,.15);
+    }}
     /* =================================================
        HERO
        ================================================= */
@@ -158,6 +182,16 @@ st.markdown(
         background:#1D4ED8;
         transform:translateY(-2px);
         box-shadow:0 8px 22px rgba(37,99,235,.25);
+    }}
+    .github-links{{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
+    }}
+
+    .github-links .github-button{{
+        margin:0;
     }}
 
     /* =================================================
@@ -540,17 +574,38 @@ st.html(
             I enjoy turning ML models into real, usable applications that solve practical business problems. I built ChurnIQ with this approach to explore how machine learning can be applied to customer churn and transformed into a complete deployed solution by combining machine learning, API development, frontend development, and deployment. In the future, I plan to extend ChurnIQ with LLM and RAG capabilities to generate personalized, context-aware customer retention recommendations based on relevant business policies and guidelines.
         </p>
 
-        <a
-            class="github-button"
-            href="https://github.com/ArjunTechie118/Customer-Churn-Prediction"
-            target="_blank"
-        >
-            View Project on GitHub ↗
-        </a>
+                <div class="github-links">
+            <a
+                class="github-button"
+                href="https://github.com/ArjunTechie118/Customer-Churn-Prediction"
+                target="_blank"
+            >
+                View Project on GitHub ↗
+            </a>
+            <a
+                class="github-button secondary-link"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=arjun.dadhich004@gmail.com"
+                target="_blank"
+            >
+                Email ↗
+            </a>
+            <a
+                class="github-button secondary-link"
+                href="https://www.linkedin.com/in/arjun-dadhich"
+                target="_blank"
+            >
+                LinkedIn ↗
+            </a>
+        </div>
     </div>
     """
 )
-
+st.html("""
+<div class="connect-links">
+<a href="mailto:arjun.dadhich004@gmail.com">Email</a>
+<a href="https://www.linkedin.com/in/arjun-dadhich" target="_blank">LinkedIn</a>
+</div>
+""")
 # =========================================================
 # WHY CHURNIQ
 # =========================================================

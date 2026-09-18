@@ -204,7 +204,7 @@ def get_svg_data(filename):
 
 
 python_logo = get_svg_data("python.svg")
-lightgbm_logo = get_svg_data("lightgbm.svg")
+lightgbm_logo = get_svg_data("LightGBM.svg")
 fastapi_logo = get_svg_data("fastapi.svg")
 streamlit_logo = get_svg_data("streamlit.svg")
 

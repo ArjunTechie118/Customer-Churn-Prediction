@@ -2,27 +2,14 @@ import streamlit as st
 import requests
 
 # =========================================================
-# PAGE CONFIGURATION
-# =========================================================
-
-st.set_page_config(
-    page_title="ChurnIQ - Predict Churn",
-    page_icon="🎯",
-    layout="wide",
-    initial_sidebar_state="collapsed"
-)
-
-# =========================================================
 # API CONFIGURATION
 # =========================================================
 
 API_URL="https://customer-churn-prediction-api-gsqc.onrender.com/predict"
+
 # =========================================================
 # THEME
 # =========================================================
-
-if "dark_mode" not in st.session_state:
-    st.session_state.dark_mode=True
 
 if st.session_state.dark_mode:
     bg_color="#0B0F19"

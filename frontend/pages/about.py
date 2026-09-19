@@ -1,22 +1,8 @@
 import streamlit as st
 
 # =========================================================
-# PAGE CONFIGURATION
-# =========================================================
-
-st.set_page_config(
-    page_title="ChurnIQ - About",
-    page_icon="ℹ️",
-    layout="wide",
-    initial_sidebar_state="collapsed"
-)
-
-# =========================================================
 # THEME
 # =========================================================
-
-if "dark_mode" not in st.session_state:
-    st.session_state.dark_mode=True
 
 if st.session_state.dark_mode:
     bg_color="#0B0F19"
@@ -85,7 +71,7 @@ st.markdown(
         padding:9px 16px;
         border:1px solid var(--border-color);
         border-radius:9px;
-        background:var(--card-bg);
+        background:var(--card-color);
         transition:all .2s ease;
     }}
     .connect-links a:hover{{

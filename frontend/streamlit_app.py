@@ -15,7 +15,7 @@ if "dark_mode" not in st.session_state:
     st.session_state.dark_mode = False
 
 if "theme_toggle" not in st.session_state:
-    st.session_state.theme_toggle = False
+    st.session_state.theme_toggle = st.session_state.dark_mode
 
 def toggle_theme():
     st.session_state.dark_mode = st.session_state.theme_toggle

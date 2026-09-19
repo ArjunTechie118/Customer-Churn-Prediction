@@ -12,7 +12,7 @@
 [![LightGBM](https://img.shields.io/badge/LightGBM-02569B?style=flat)](https://lightgbm.readthedocs.io/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-[Live Demo](#) · [API Docs](#-api-reference) · [Report Bug](../../issues)
+[Live Demo](https://customer-churn-prediction-lgbm.streamlit.app/) · [Report Bug](../../issues)
 
 </div>
 
@@ -130,7 +130,7 @@ Churn-Prediction/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/<your-username>/ChurnIQ.git
+git clone https://github.com/ArjunTechie118/Customer-Churn-Prediction.git/
 cd ChurnIQ
 ```
 

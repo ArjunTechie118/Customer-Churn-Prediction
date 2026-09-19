@@ -177,7 +177,7 @@ Interactive docs at `http://localhost:8000/docs`
 **Terminal 2 — Streamlit frontend**
 
 ```bash
-streamlit run app/streamlit_app.py
+streamlit run frontend/streamlit_app.py
 ```
 
 Frontend available at `http://localhost:8501`
@@ -194,12 +194,20 @@ Returns a churn prediction for a single customer.
 
 ```json
 {
+  "senior_citizen": 0,
+  "partner": "Yes",
+  "dependents": "No",
   "tenure": 12,
-  "monthly_charges": 79.85,
-  "total_charges": 958.2,
-  "contract": "Month-to-month",
   "internet_service": "Fiber optic",
-  "payment_method": "Electronic check"
+  "online_security": "No",
+  "online_backup": "No",
+  "device_protection": "No",
+  "tech_support": "No",
+  "contract": "Month-to-month",
+  "paperless_billing": "Yes",
+  "payment_method": "Electronic check",
+  "monthly_charges": 79.85,
+  "total_charges": 958.2
 }
 ```
 
@@ -233,16 +241,6 @@ Health check endpoint for uptime monitoring.
 | F1 Score | `63.60%` |
 | ROC-AUC | `85.21%` |
 
-
----
-
-## 🗺️ Roadmap
-
-- [ ] Batch prediction via CSV upload
-- [ ] Model monitoring and drift detection
-- [ ] Automated retraining pipeline
-- [ ] Authentication for the API
-
 ---
 
 ## Future Roadmap
@@ -258,20 +256,13 @@ The next phase of ChurnIQ will integrate SHAP explainability, company policies, 
 - Company Policies
 - LLM + RAG
 - Retention Recommendation
-```
 
 ---
 
-## 📄 License
+## License
 
 Distributed under the MIT License. See [`LICENSE`](LICENSE) for details.
 
 ---
 
-<div align="center">
-
-**Built with ❤️ by [Your Name](https://github.com/<your-username>)**
-
-⭐ Star this repo if you found it useful
-
-</div>
+Built by [Arjun Dadhich](https://github.com/ArjunTechie118/Customer-Churn-Prediction)

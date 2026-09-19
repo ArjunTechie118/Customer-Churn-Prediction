@@ -30,17 +30,16 @@ st.markdown(
     <style>
 
     :root {{
-        --bg-color: #F8FAFC;
-        --card-color: #FFFFFF;
-        --text-color: #0F172A;
-        --muted-color: #475569;
-        --border-color: #CBD5E1;
-        --input-color: #FFFFFF;
-        --hover-color: #EFF6FF;
-        --accent-color: #2563EB;
-        --accent-light: #60A5FA;
+        --bg-color:{bg_color};
+        --card-color:{card_color};
+        --text-color:{text_color};
+        --muted-color:{muted_color};
+        --border-color:{border_color};
+        --input-color:{card_color};
+        --hover-color:{hover_color};
+        --accent-color:#2563EB;
+        --accent-light:#60A5FA;
     }}
-
     .stApp {{
         background-color:var(--bg-color);
         color:var(--text-color);

@@ -233,7 +233,6 @@ Health check endpoint for uptime monitoring.
 | F1 Score | `63.60%` |
 | ROC-AUC | `85.21%` |
 
-> Replace with your actual evaluation results from the test set.
 
 ---
 

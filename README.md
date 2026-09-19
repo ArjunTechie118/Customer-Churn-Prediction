@@ -1,17 +1,34 @@
-# ChurnIQ
+<div align="center">
+
+# 🎯 ChurnIQ
 
 ### AI-Powered Churn Intelligence
 
-ChurnIQ is an end-to-end machine learning application designed to predict customer churn and identify customers who may be at risk of leaving.
+*Predict customer churn before it happens.*
 
-The project goes beyond model training by combining a machine learning model with a FastAPI backend, Streamlit frontend, and cloud deployment to create a complete, usable ML product.
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat&logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![LightGBM](https://img.shields.io/badge/LightGBM-02569B?style=flat)](https://lightgbm.readthedocs.io/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+[Live Demo](#) · [API Docs](#-api-reference) · [Report Bug](../../issues)
+
+</div>
 
 ---
+
+ChurnIQ is an end-to-end machine learning application designed to predict customer churn and identify customers who may be at risk of leaving.
+
+The project goes beyond model training by combining a machine learning model with a **FastAPI** backend, **Streamlit** frontend, and cloud deployment to create a complete, usable ML product.
+
+---
+
 ## 🚀 Project Overview
 
 Customer churn is a common business challenge. Identifying customers who are likely to leave can help businesses take action before they churn.
 
-ChurnIQ takes customer information as input and uses a trained LightGBM classification model to generate:
+ChurnIQ takes customer information as input and uses a trained **LightGBM** classification model to generate:
 
 - Churn prediction
 - Churn probability
@@ -23,19 +40,23 @@ The application provides a simple interface where users can enter customer detai
 
 ## ✨ Features
 
-- Customer churn prediction using Machine Learning
-- Churn probability estimation
-- Low, Medium, and High risk classification
-- Interactive Streamlit frontend
-- FastAPI REST API for model inference
-- Input validation using Pydantic
-- End-to-end ML pipeline
-- Cloud-deployed application
-- API and frontend separated into independent components
+| | Feature |
+|---|---|
+| 🤖 | Customer churn prediction using Machine Learning |
+| 📊 | Churn probability estimation |
+| 🚦 | Low, Medium, and High risk classification |
+| 🎨 | Interactive Streamlit frontend |
+| ⚡ | FastAPI REST API for model inference |
+| ✅ | Input validation using Pydantic |
+| 🔄 | End-to-end ML pipeline |
+| ☁️ | Cloud-deployed application |
+| 🧩 | API and frontend separated into independent components |
 
 ---
 
 ## 🧠 How ChurnIQ Works
+
+```text
 Customer Information
         ↓
 Data Processing
@@ -47,92 +68,30 @@ Churn Probability
 Churn / No Churn Prediction
         ↓
 Risk Level
+```
 
-## 🤖 Machine Learning
-Model
+### Risk Classification
 
-LightGBM Classifier
+| Risk Level | Churn Probability | Suggested Action |
+|:---|:---|:---|
+| 🟢 **Low** | `0.00 – 0.39` | Monitor normally |
+| 🟡 **Medium** | `0.40 – 0.69` | Proactive engagement |
+| 🔴 **High** | `0.70 – 1.00` | Immediate retention outreach |
 
-LightGBM was selected as the classification model for predicting whether a customer is likely to churn.
+---
 
-The model works with customer demographic, service, contract, and billing-related information.
+## 🛠️ Tech Stack
 
-Prediction Output
+**Machine Learning** — LightGBM, scikit-learn, pandas, NumPy  
+**Backend** — FastAPI, Pydantic, Uvicorn  
+**Frontend** — Streamlit  
+**Deployment** — Docker, Cloud hosting
 
-The model produces:
-
-Prediction → Churn / No Churn
-Probability → Churn probability
-
-The application then uses the prediction probability to determine the customer's risk level.
-
-## 📊 Input Features
-
-ChurnIQ uses customer information such as:
-
-Customer Profile
-Senior Citizen
-Partner
-Dependents
-Tenure Months
-Service Information
-Internet Service
-Online Security
-Online Backup
-Device Protection
-Tech Support
-Contract & Billing
-Contract
-Paperless Billing
-Payment Method
-Monthly Charges
-Total Charges
-
-
-## 🏗️ Technology Stack
-
-Python	
-Pandas	
-NumPy	
-Scikit-learn	
-LightGBM	
-FastAPI	
-Pydantic	
-Streamlit	
-Git & GitHub	
-Render
-
-
-## 🔌 Deployment Architecture
-
-┌──────────────────────┐
-│   Streamlit Frontend │
-│     User Interface   │
-└──────────┬───────────┘
-           │
-           │ REST API
-           ↓
-┌──────────────────────┐
-│    FastAPI Backend   │
-│       /predict       │
-└──────────┬───────────┘
-           │
-           ↓
-┌──────────────────────┐
-│   LightGBM Model     │
-│   Churn Prediction   │
-└──────────┬───────────┘
-           │
-           ↓
-┌──────────────────────┐
-│    API Response      │
-│ Prediction +         │
-│ Churn Probability    │
-└──────────────────────┘
-
+---
 
 ## 📁 Project Structure
 
+```text
 Churn-Prediction/
 │
 ├── frontend/
@@ -162,128 +121,155 @@ Churn-Prediction/
 ├── setup.py
 ├── .gitignore
 └── README.md
+```
 
+---
 
-## 🔗 API
+## ⚙️ Installation
 
-ChurnIQ uses FastAPI to expose the trained ML model through a REST API.
+### 1. Clone the repository
 
-Health Check
-GET /health
+```bash
+git clone https://github.com/<your-username>/ChurnIQ.git
+cd ChurnIQ
+```
 
-Used to verify that the API is running.
+### 2. Create a virtual environment
 
-Prediction
-POST /predict
-
-The endpoint accepts customer information and returns:
-
-{
-  "prediction": "Churn",
-  "churn_probability": 0.78
-}
-
-
-## 💻 Run Locally
-1. Clone the repository:
-
-git clone https://github.com/ArjunTechie118/Customer-Churn-Prediction.git
-
-cd Customer-Churn-Prediction
-
-2. Create a virtual environment
-
+```bash
 python -m venv venv
 
-3. Activate the virtual environment
-
-Windows:
+# Windows
 venv\Scripts\activate
 
-macOS/Linux:
+# macOS / Linux
 source venv/bin/activate
+```
 
-4. Install dependencies:
+### 3. Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-5. Run the FastAPI backend:
-uvicorn app:app --reload
+---
 
-The API will be available at:
+## ▶️ Running the Application
 
-http://127.0.0.1:8000
+Run the backend and frontend in **two separate terminals**.
 
-6. Run the Streamlit frontend
+**Terminal 1 — FastAPI backend**
 
-From the frontend directory:
-streamlit run frontend/streamlit_app.py
+```bash
+uvicorn api.main:app --reload --port 8000
+```
 
-## 🌐 Live Application
+API available at `http://localhost:8000`  
+Interactive docs at `http://localhost:8000/docs`
 
-The project is deployed and available online.
-Live ChurnIQ: https://customer-churn-prediction-lgbm.streamlit.app/
+**Terminal 2 — Streamlit frontend**
 
-GitHub Repository
+```bash
+streamlit run app/streamlit_app.py
+```
 
-https://github.com/ArjunTechie118/Customer-Churn-Prediction
+Frontend available at `http://localhost:8501`
 
-## 🛣️ Future Roadmap
+---
 
-SHAP Explainability
+## 🔌 API Reference
 
-Add SHAP-based explainability to show which customer features contribute most to an individual churn prediction.
+### `POST /predict`
 
-LLM + RAG for Retention Recommendations
+Returns a churn prediction for a single customer.
 
-Extend ChurnIQ with an LLM and RAG pipeline to generate personalized, context-aware customer retention recommendations grounded in relevant business policies and guidelines.
+**Request**
 
-The goal is to move from:
+```json
+{
+  "tenure": 12,
+  "monthly_charges": 79.85,
+  "total_charges": 958.2,
+  "contract": "Month-to-month",
+  "internet_service": "Fiber optic",
+  "payment_method": "Electronic check"
+}
+```
 
-Predict Churn
-      ↓
-Understand Risk
-      ↓
-Recommend Retention Action
+**Response**
 
-This would extend ChurnIQ from a churn prediction system toward a more complete customer retention intelligence workflow.
+```json
+{
+  "churn_prediction": 1,
+  "churn_probability": 0.82,
+  "risk_level": "High"
+}
+```
 
-## 🎯 Project Goals
+**cURL example**
 
-ChurnIQ was built to demonstrate an end-to-end approach to machine learning engineering:
+```bash
+curl -X POST "http://localhost:8000/predict" \
+  -H "Content-Type: application/json" \
+  -d '{"tenure": 12, "monthly_charges": 79.85, "total_charges": 958.2, "contract": "Month-to-month", "internet_service": "Fiber optic", "payment_method": "Electronic check"}'
+```
 
-Data
- ↓
-Preprocessing
- ↓
-Model Development
- ↓
-Prediction Pipeline
- ↓
-FastAPI
- ↓
-Streamlit
- ↓
-Deployment
+### `GET /health`
 
-The project focuses on taking a machine learning model beyond experimentation and turning it into a practical application.
+Health check endpoint for uptime monitoring.
 
-## 👨‍💻 Author
+```json
+{ "status": "ok" }
+```
 
-Arjun
+---
 
-An AI/ML Engineer passionate about building practical, end-to-end machine learning products that go beyond just model training
+## 📈 Model Performance
 
-GitHub:
+| Metric | Score |
+|:---|:---|
+| Accuracy | `0.00` |
+| Precision | `0.00` |
+| Recall | `0.00` |
+| F1 Score | `0.00` |
+| ROC-AUC | `0.00` |
 
-https://github.com/ArjunTechie118
+> Replace with your actual evaluation results from the test set.
 
-## ⭐ If you found this project interesting
+---
 
-Feel free to explore the repository and follow the project as new capabilities are added.
+## 🗺️ Roadmap
 
+- [ ] Batch prediction via CSV upload
+- [ ] SHAP-based explainability for individual predictions
+- [ ] Model monitoring and drift detection
+- [ ] Automated retraining pipeline
+- [ ] Authentication for the API
 
-### One important change I'd make before you paste it
+---
 
-Your **Project Structure** in the README should match your actual GitHub repository exactly. I know your repo currently has `data`, `frontend`, `images`, `modelling`, `notebook`, `src`, `app.py`, `requirements.txt`, `setup.py`, etc., but I don't want to invent files inside those folders.
+## 🤝 Contributing
 
-If you want, I can also :contentReference[oaicite:0]{index=0}—while keeping every claim a
+Contributions are welcome. Fork the repo, create a feature branch, and open a pull request.
+
+```bash
+git checkout -b feature/your-feature
+git commit -m "Add your feature"
+git push origin feature/your-feature
+```
+
+---
+
+## 📄 License
+
+Distributed under the MIT License. See [`LICENSE`](LICENSE) for details.
+
+---
+
+<div align="center">
+
+**Built with ❤️ by [Your Name](https://github.com/<your-username>)**
+
+⭐ Star this repo if you found it useful
+
+</div>

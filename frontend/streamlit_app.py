@@ -140,126 +140,96 @@ st.markdown(
     }}
 
     /* =====================================================
-       CUSTOM NAVIGATION
+       NAVIGATION BUTTONS
        ===================================================== */
 
-    .custom-nav {{
-        width:100%;
-        height:44px;
-
-        display:flex;
-        align-items:center;
-        justify-content:center;
-
-        box-sizing:border-box;
-
-        margin:0;
-        padding:0;
-
-        overflow:visible;
+    div[data-testid="stButton"] {{
+        display:flex !important;
+        justify-content:center !important;
+        align-items:center !important;
+        width:100% !important;
     }}
 
-    .custom-nav a {{
-        width:100%;
-        height:44px;
+    div[data-testid="stButton"] > button {{
+        width:100% !important;
+        height:44px !important;
+        min-height:44px !important;
 
-        display:flex;
-        align-items:center;
-        justify-content:center;
+        display:flex !important;
+        align-items:center !important;
+        justify-content:center !important;
 
-        box-sizing:border-box;
+        box-sizing:border-box !important;
 
-        margin:0;
-        padding:0 12px;
+        margin:0 !important;
+        padding:0 12px !important;
 
-        border:none;
-        border-radius:10px;
+        border:1px solid transparent !important;
+        border-radius:10px !important;
 
-        background:transparent;
-
+        background:transparent !important;
         color:var(--nav-text) !important;
 
-        font-family:inherit;
-        font-size:15px;
-        font-weight:600;
+        font-family:inherit !important;
+        font-size:15px !important;
+        font-weight:600 !important;
 
-        line-height:1;
-
-        text-decoration:none !important;
-        white-space:nowrap;
+        line-height:1 !important;
+        white-space:nowrap !important;
 
         transform:none !important;
-        position:relative;
+        position:static !important;
 
         box-shadow:none !important;
+
+        outline:none !important;
 
         transition:
             background-color .15s ease,
             color .15s ease !important;
     }}
 
-    .custom-nav a:hover {{
-        background-color:var(--hover-color);
-
+    div[data-testid="stButton"] > button:hover {{
+        background:var(--hover-color) !important;
         color:var(--accent-color) !important;
 
+        border-color:transparent !important;
+
         transform:none !important;
-        position:relative;
+        position:static !important;
 
         box-shadow:none !important;
     }}
 
-    .custom-nav a:active {{
+    div[data-testid="stButton"] > button:active {{
+        background:var(--hover-color) !important;
+        color:var(--accent-color) !important;
+
+        border-color:transparent !important;
+
         transform:none !important;
-        position:relative;
+        position:static !important;
+
         box-shadow:none !important;
     }}
 
-    .custom-nav a:focus {{
-        outline:none !important;
-        box-shadow:none !important;
-    }}
-
-    .custom-nav a:visited {{
+    div[data-testid="stButton"] > button:focus {{
+        background:transparent !important;
         color:var(--nav-text) !important;
-    }}
 
-    .custom-nav a:hover:visited {{
-        color:var(--accent-color) !important;
-    }}
+        border-color:transparent !important;
 
-    /* =====================================================
-       ACTIVE NAVIGATION
-       ===================================================== */
-
-    .active-nav {{
-        width:100%;
-        height:44px;
-
-        display:flex;
-        align-items:center;
-        justify-content:center;
-
-        box-sizing:border-box;
-
-        margin:0;
-        padding:0 12px;
-
-        border-radius:10px;
-
-        background:transparent;
-
-        color:var(--accent-color) !important;
-
-        font-size:15px;
-        font-weight:700;
-
-        line-height:1;
-
-        white-space:nowrap;
-        overflow:visible;
-
+        outline:none !important;
         transform:none !important;
+        position:static !important;
+
+        box-shadow:none !important;
+    }}
+
+    div[data-testid="stButton"] > button:focus-visible {{
+        outline:none !important;
+        border-color:transparent !important;
+        box-shadow:none !important;
     }}
 
     /* =====================================================
@@ -269,9 +239,7 @@ st.markdown(
     .theme-divider {{
         width:1px;
         height:30px;
-
         background-color:var(--border-color);
-
         margin:auto;
     }}
 
@@ -283,16 +251,13 @@ st.markdown(
         display:flex !important;
         justify-content:center !important;
         align-items:center !important;
-
         visibility:visible !important;
         opacity:1 !important;
     }}
 
     div[data-testid="stToggle"] > label {{
         visibility:hidden !important;
-
         width:0 !important;
-
         margin:0 !important;
         padding:0 !important;
     }}
@@ -300,7 +265,6 @@ st.markdown(
     div[data-testid="stToggle"] [role="switch"] {{
         width:46px !important;
         min-width:46px !important;
-
         height:24px !important;
         min-height:24px !important;
 
@@ -323,7 +287,6 @@ st.markdown(
     div[data-testid="stToggle"] [role="switch"]::after {{
         width:18px !important;
         height:18px !important;
-
         background-color:#FFFFFF !important;
 
         visibility:visible !important;
@@ -357,7 +320,6 @@ st.markdown(
     div.stButton > button[kind="primary"]:hover {{
         background-color:#1D4ED8 !important;
         border-color:#1D4ED8 !important;
-
         box-shadow:0 6px 18px rgba(37,99,235,0.25);
     }}
 
@@ -388,10 +350,9 @@ st.markdown(
             font-size:11px;
         }}
 
-        .custom-nav a,
-        .active-nav {{
-            font-size:13px;
-            padding:0 6px;
+        div[data-testid="stButton"] > button {{
+            font-size:13px !important;
+            padding:0 6px !important;
         }}
 
     }}
@@ -406,7 +367,7 @@ st.markdown(
 # =========================================================
 
 brand_col, home_col, predict_col, about_col, divider_col, theme_col = st.columns(
-    [2.8, 1.1, 1.4, 1.1, 0.25, 0.7],
+    [2.8,1.1,1.4,1.1,0.25,0.7],
     vertical_alignment="center"
 )
 
@@ -428,73 +389,40 @@ with brand_col:
     )
 
 # =========================================================
-# CURRENT PAGE
-# =========================================================
-
-current_page = pg.url_path if hasattr(pg, "url_path") else ""
-
-# =========================================================
 # HOME
 # =========================================================
 
 with home_col:
-
-    if current_page.endswith("home") or current_page == "":
-        st.markdown(
-            '<div class="active-nav">🏠&nbsp; Home</div>',
-            unsafe_allow_html=True
-        )
-    else:
-        st.markdown(
-            """
-            <div class="custom-nav">
-                <a href="/home">🏠&nbsp; Home</a>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+    if st.button(
+        "🏠  Home",
+        key="nav_home",
+        use_container_width=True
+    ):
+        st.switch_page("pages/home.py")
 
 # =========================================================
 # PREDICT CHURN
 # =========================================================
 
 with predict_col:
-
-    if current_page.endswith("predict"):
-        st.markdown(
-            '<div class="active-nav">🎯&nbsp; Predict Churn</div>',
-            unsafe_allow_html=True
-        )
-    else:
-        st.markdown(
-            """
-            <div class="custom-nav">
-                <a href="/predict">🎯&nbsp; Predict Churn</a>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+    if st.button(
+        "🎯  Predict Churn",
+        key="nav_predict",
+        use_container_width=True
+    ):
+        st.switch_page("pages/predict.py")
 
 # =========================================================
 # ABOUT
 # =========================================================
 
 with about_col:
-
-    if current_page.endswith("about"):
-        st.markdown(
-            '<div class="active-nav">ℹ️&nbsp; About</div>',
-            unsafe_allow_html=True
-        )
-    else:
-        st.markdown(
-            """
-            <div class="custom-nav">
-                <a href="/about">ℹ️&nbsp; About</a>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+    if st.button(
+        "ℹ️  About",
+        key="nav_about",
+        use_container_width=True
+    ):
+        st.switch_page("pages/about.py")
 
 # =========================================================
 # DIVIDER

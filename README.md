@@ -82,10 +82,17 @@ Risk Level
 
 ## 🛠️ Tech Stack
 
-**Machine Learning** — LightGBM, scikit-learn, pandas, NumPy  
-**Backend** — FastAPI, Pydantic, Uvicorn  
-**Frontend** — Streamlit  
-**Deployment** — Docker, Cloud hosting
+- Python
+- LightGBM
+- scikit-learn
+- pandas
+- NumPy
+- Matplotlib
+- Seaborn
+- FastAPI
+- Pydantic
+- Uvicorn
+- Streamlit
 
 ---
 
@@ -206,20 +213,12 @@ Returns a churn prediction for a single customer.
 }
 ```
 
-**cURL example**
-
-```bash
-curl -X POST "http://localhost:8000/predict" \
-  -H "Content-Type: application/json" \
-  -d '{"tenure": 12, "monthly_charges": 79.85, "total_charges": 958.2, "contract": "Month-to-month", "internet_service": "Fiber optic", "payment_method": "Electronic check"}'
-```
-
 ### `GET /health`
 
 Health check endpoint for uptime monitoring.
 
 ```json
-{ "status": "ok" }
+{ "status": "healthy" }
 ```
 
 ---
@@ -228,11 +227,11 @@ Health check endpoint for uptime monitoring.
 
 | Metric | Score |
 |:---|:---|
-| Accuracy | `0.00` |
-| Precision | `0.00` |
-| Recall | `0.00` |
-| F1 Score | `0.00` |
-| ROC-AUC | `0.00` |
+| Accuracy | `79.55%` |
+| Precision | `60.28%` |
+| Recall | `67.37%` |
+| F1 Score | `63.60%` |
+| ROC-AUC | `85.21%` |
 
 > Replace with your actual evaluation results from the test set.
 
@@ -241,21 +240,25 @@ Health check endpoint for uptime monitoring.
 ## 🗺️ Roadmap
 
 - [ ] Batch prediction via CSV upload
-- [ ] SHAP-based explainability for individual predictions
 - [ ] Model monitoring and drift detection
 - [ ] Automated retraining pipeline
 - [ ] Authentication for the API
 
 ---
 
-## 🤝 Contributing
+## Future Roadmap
 
-Contributions are welcome. Fork the repo, create a feature branch, and open a pull request.
+**From Predicting Churn to Helping Prevent Customer Loss**
 
-```bash
-git checkout -b feature/your-feature
-git commit -m "Add your feature"
-git push origin feature/your-feature
+The next phase of ChurnIQ will integrate SHAP explainability, company policies, and an LLM + RAG system to generate grounded customer-retention recommendations.
+
+**Current:** ML-based churn prediction → **Future:** AI-powered retention recommendations
+
+- Churn Prediction
+- SHAP / Key Factors
+- Company Policies
+- LLM + RAG
+- Retention Recommendation
 ```
 
 ---

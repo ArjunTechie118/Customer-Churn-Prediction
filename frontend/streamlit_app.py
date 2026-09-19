@@ -83,16 +83,32 @@ st.markdown(
         --toggle-off: {toggle_off};
     }}
     .stApp {{
-        background-color: {bg_color};
-        color: {text_color};
-        --bg-color: {bg_color};
-        --card-color: {card_color};
-        --text-color: {text_color};
-        --muted-color: {muted_color};
-        --border-color: {border_color};
-        --hover-color: {hover_color};
-        --nav-text: {nav_text};
-    }}
+    background-color: {bg_color};
+    color: {text_color};
+
+    --bg-color: {bg_color};
+    --card-color: {card_color};
+    --text-color: {text_color};
+    --muted-color: {muted_color};
+    --border-color: {border_color};
+    --hover-color: {hover_color};
+    --nav-text: {nav_text};
+}}
+
+[data-testid="stAppViewContainer"],
+[data-testid="stMain"],
+main {{
+    background-color: var(--bg-color) !important;
+    color: var(--text-color) !important;
+}}
+
+[data-testid="stHeader"] {{
+    background-color: var(--bg-color) !important;
+}}
+
+[data-testid="stToolbar"] {{
+    background-color: transparent !important;
+}}
     .block-container {{
         padding-top: 2.2rem;
         padding-left: 4rem;

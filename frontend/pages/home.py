@@ -13,25 +13,18 @@ st.markdown(
         }
 
         .hero-section{
+            width:100%;
+            max-width:100%;
             display:flex;
             align-items:center;
             justify-content:space-between;
-            gap:55px;
-            padding:48px 42px 50px;
-            margin:0 -20px;
-            background:
-                radial-gradient(
-                    circle at 78% 45%,
-                    rgba(37,99,235,.15),
-                    transparent 35%
-                ),
-                linear-gradient(
-                    135deg,
-                    var(--card-color,#fff),
-                    var(--bg-color,#f8fafc)
-                );
+            gap:40px;
+            padding:48px 32px 50px;
+            margin:0;
+            background:radial-gradient(circle at 78% 45%,rgba(37,99,235,.15),transparent 35%),linear-gradient(135deg,var(--card-color,#fff),var(--bg-color,#f8fafc));
             border-radius:0 0 28px 28px;
             box-sizing:border-box;
+            overflow:hidden;
         }
 
         .hero-content{
@@ -77,15 +70,18 @@ st.markdown(
         }
 
         .hero-preview{
-            flex:0 0 400px;
+            flex:0 1 400px;
+            width:400px;
+            max-width:400px;
+            min-width:0;
             display:flex;
             flex-direction:column;
             align-items:center;
         }
 
         .risk-card{
-            width:400px;
-            max-width:100%;
+            width:100%;
+            max-width:400px;
             background:var(--card-color,#fff);
             border:1px solid var(--border-color,#dbeafe);
             border-radius:16px;

@@ -3,8 +3,10 @@ import streamlit as st
 # =========================================================
 # PAGE CONFIGURATION
 # =========================================================
+
 st.set_page_config(
     page_title="ChurnIQ",
+    page_icon="🎯",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -12,16 +14,17 @@ st.set_page_config(
 # =========================================================
 # THEME STATE
 # =========================================================
-# Toggle OFF = Light theme
-# Toggle ON  = Dark theme
+
 if "theme_toggle" not in st.session_state:
     st.session_state.theme_toggle = False
 
-dark_mode = st.session_state.theme_toggle
+# Single source of truth
+st.session_state.dark_mode = st.session_state.theme_toggle
 
 # =========================================================
 # NAVIGATION
 # =========================================================
+
 home_page = st.Page(
     "pages/home.py",
     title="Home",
@@ -48,7 +51,8 @@ pg = st.navigation(
 # =========================================================
 # THEME COLORS
 # =========================================================
-if dark_mode:
+
+if st.session_state.dark_mode:
     bg_color = "#0B0F19"
     card_color = "#1E293B"
     text_color = "#F8FAFC"
@@ -73,6 +77,7 @@ accent_light = "#60A5FA"
 # =========================================================
 # GLOBAL CSS
 # =========================================================
+
 st.markdown(
     f"""
     <style>
@@ -90,36 +95,18 @@ st.markdown(
         --toggle-off: {toggle_off};
     }}
 
-    /* =====================================================
-       MAIN STREAMLIT APP
-       ===================================================== */
+    html,
+    body {{
+        background-color: {bg_color} !important;
+    }}
 
     .stApp {{
         background-color: {bg_color} !important;
         color: {text_color} !important;
-
-        --bg-color: {bg_color};
-        --card-color: {card_color};
-        --text-color: {text_color};
-        --muted-color: {muted_color};
-        --border-color: {border_color};
-        --hover-color: {hover_color};
-        --nav-text: {nav_text};
     }}
 
-    [data-testid="stAppViewContainer"] {{
-        background-color: {bg_color} !important;
-    }}
-
-    [data-testid="stMain"] {{
-        background-color: {bg_color} !important;
-        color: {text_color} !important;
-    }}
-
-    [data-testid="stMainBlockContainer"] {{
-        background-color: {bg_color} !important;
-    }}
-
+    [data-testid="stAppViewContainer"],
+    [data-testid="stMain"],
     main {{
         background-color: {bg_color} !important;
         color: {text_color} !important;
@@ -133,19 +120,16 @@ st.markdown(
         background-color: transparent !important;
     }}
 
-    header[data-testid="stHeader"] {{
-        background-color: transparent !important;
+    [data-testid="stDecoration"] {{
+        display: none !important;
     }}
 
-    /* =====================================================
-       MAIN CONTENT SPACING
-       ===================================================== */
-
     .block-container {{
-        padding-top: 1.1rem !important;
+        padding-top: 1.4rem !important;
         padding-left: 2.2rem !important;
         padding-right: 2.2rem !important;
         padding-bottom: 3rem !important;
+        max-width: 100% !important;
     }}
 
     /* =====================================================
@@ -158,7 +142,6 @@ st.markdown(
         color: var(--text-color) !important;
         line-height: 1.1;
         white-space: nowrap;
-        margin-top: 2px;
     }}
 
     .brand-name span {{
@@ -191,7 +174,6 @@ st.markdown(
         font-size: 15px;
         font-weight: 600;
         box-shadow: none !important;
-
         transition:
             background-color 0.2s ease,
             color 0.2s ease,
@@ -315,7 +297,6 @@ st.markdown(
     @media (max-width: 900px) {{
 
         .block-container {{
-            padding-top: 0.8rem !important;
             padding-left: 1.2rem !important;
             padding-right: 1.2rem !important;
         }}
@@ -337,6 +318,7 @@ st.markdown(
 # =========================================================
 # NAVBAR
 # =========================================================
+
 brand_col, home_col, predict_col, about_col, divider_col, theme_col = st.columns(
     [2.8, 1.1, 1.4, 1.1, 0.25, 0.7],
     vertical_alignment="center"
@@ -345,6 +327,7 @@ brand_col, home_col, predict_col, about_col, divider_col, theme_col = st.columns
 # =========================================================
 # BRAND
 # =========================================================
+
 with brand_col:
     st.markdown(
         '<div class="brand-name">Churn<span>IQ</span></div>'
@@ -355,17 +338,21 @@ with brand_col:
 # =========================================================
 # CURRENT PAGE
 # =========================================================
+
 current_page = pg.url_path if hasattr(pg, "url_path") else ""
 
 # =========================================================
 # HOME
 # =========================================================
+
 with home_col:
-    if current_page.endswith("home"):
+
+    if current_page.endswith("home") or current_page == "":
         st.markdown(
             '<div class="active-nav">🏠&nbsp; Home</div>',
             unsafe_allow_html=True
         )
+
     else:
         if st.button(
             "🏠  Home",
@@ -376,12 +363,15 @@ with home_col:
 # =========================================================
 # PREDICT CHURN
 # =========================================================
+
 with predict_col:
+
     if current_page.endswith("predict"):
         st.markdown(
             '<div class="active-nav">🎯&nbsp; Predict Churn</div>',
             unsafe_allow_html=True
         )
+
     else:
         if st.button(
             "🎯  Predict Churn",
@@ -392,12 +382,15 @@ with predict_col:
 # =========================================================
 # ABOUT
 # =========================================================
+
 with about_col:
+
     if current_page.endswith("about"):
         st.markdown(
             '<div class="active-nav">ℹ️&nbsp; About</div>',
             unsafe_allow_html=True
         )
+
     else:
         if st.button(
             "ℹ️  About",
@@ -408,7 +401,9 @@ with about_col:
 # =========================================================
 # DIVIDER
 # =========================================================
+
 with divider_col:
+
     st.markdown(
         '<div class="theme-divider"></div>',
         unsafe_allow_html=True
@@ -417,7 +412,9 @@ with divider_col:
 # =========================================================
 # THEME TOGGLE
 # =========================================================
+
 with theme_col:
+
     st.toggle(
         "Theme",
         key="theme_toggle",
@@ -425,6 +422,14 @@ with theme_col:
     )
 
 # =========================================================
+# IMPORTANT:
+# Sync theme AFTER toggle is processed
+# =========================================================
+
+st.session_state.dark_mode = st.session_state.theme_toggle
+
+# =========================================================
 # RUN CURRENT PAGE
 # =========================================================
+
 pg.run()

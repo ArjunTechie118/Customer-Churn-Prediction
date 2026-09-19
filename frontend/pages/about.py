@@ -4,25 +4,22 @@ import streamlit as st
 # THEME
 # =========================================================
 
-if st.session_state.dark_mode:
-    bg_color="#0B0F19"
-    card_color="#1E293B"
-    text_color="#F8FAFC"
-    muted_color="#CBD5E1"
-    border_color="#334155"
-    input_color="#111827"
-    hover_color="#263449"
-else:
-    bg_color="#F8FAFC"
-    card_color="#FFFFFF"
-    text_color="#0F172A"
-    muted_color="#475569"
-    border_color="#CBD5E1"
-    input_color="#FFFFFF"
-    hover_color="#EFF6FF"
+dark_mode = st.session_state.get("dark_mode", False)
 
-accent_color="#2563EB"
-accent_light="#60A5FA"
+if dark_mode:
+    bg_color = "#0B0F19"
+    card_color = "#1E293B"
+    text_color = "#F8FAFC"
+    muted_color = "#CBD5E1"
+    border_color = "#334155"
+    hover_color = "#263449"
+else:
+    bg_color = "#F8FAFC"
+    card_color = "#FFFFFF"
+    text_color = "#0F172A"
+    muted_color = "#475569"
+    border_color = "#CBD5E1"
+    hover_color = "#EFF6FF"
 
 # =========================================================
 # CSS
@@ -33,15 +30,15 @@ st.markdown(
     <style>
 
     :root {{
-        --bg-color:{bg_color};
-        --card-color:{card_color};
-        --text-color:{text_color};
-        --muted-color:{muted_color};
-        --border-color:{border_color};
-        --input-color:{input_color};
-        --hover-color:{hover_color};
-        --accent-color:{accent_color};
-        --accent-light:{accent_light};
+        --bg-color: #F8FAFC;
+        --card-color: #FFFFFF;
+        --text-color: #0F172A;
+        --muted-color: #475569;
+        --border-color: #CBD5E1;
+        --input-color: #FFFFFF;
+        --hover-color: #EFF6FF;
+        --accent-color: #2563EB;
+        --accent-light: #60A5FA;
     }}
 
     .stApp {{

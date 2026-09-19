@@ -1,5 +1,9 @@
 import streamlit as st
 
+# =========================================================
+# PAGE CONFIGURATION
+# =========================================================
+
 st.set_page_config(
     page_title="ChurnIQ",
     page_icon="🎯",
@@ -15,13 +19,13 @@ if "dark_mode" not in st.session_state:
     st.session_state.dark_mode = False
 
 if "theme_toggle" not in st.session_state:
-    st.session_state.theme_toggle = st.session_state.dark_mode
+    st.session_state.theme_toggle = False
 
 def toggle_theme():
     st.session_state.dark_mode = st.session_state.theme_toggle
 
 # =========================================================
-# PAGES
+# NAVIGATION
 # =========================================================
 
 home_page = st.Page(
@@ -59,6 +63,8 @@ if st.session_state.dark_mode:
     border_color = "#334155"
     hover_color = "#263449"
     nav_text = "#E2E8F0"
+    toggle_off = "#475569"
+    brand_color = "#FFFFFF"
 else:
     bg_color = "#F8FAFC"
     card_color = "#FFFFFF"
@@ -67,6 +73,8 @@ else:
     border_color = "#CBD5E1"
     hover_color = "#EFF6FF"
     nav_text = "#334155"
+    toggle_off = "#94A3B8"
+    brand_color = "#2563EB"
 
 accent_color = "#2563EB"
 accent_light = "#60A5FA"
@@ -80,148 +88,296 @@ st.markdown(
     <style>
 
     :root {{
+        --accent-color:{accent_color};
+        --accent-light:{accent_light};
         --bg-color:{bg_color};
         --card-color:{card_color};
         --text-color:{text_color};
         --muted-color:{muted_color};
         --border-color:{border_color};
-        --input-color:{card_color};
         --hover-color:{hover_color};
         --nav-text:{nav_text};
-        --accent-color:{accent_color};
-        --accent-light:{accent_light};
-    }}
-
-    html,
-    body,
-    [data-testid="stAppViewContainer"],
-    [data-testid="stHeader"] {{
-        background-color:{bg_color}!important;
+        --toggle-off:{toggle_off};
+        --brand-color:{brand_color};
     }}
 
     .stApp {{
-        background-color:{bg_color}!important;
-        color:{text_color}!important;
+        background-color:{bg_color};
+        color:{text_color};
     }}
 
     .block-container {{
-        padding-top:3.5rem!important;
-        padding-left:1rem!important;
-        padding-right:1rem!important;
-        padding-bottom:3rem!important;
-        max-width:100%!important;
+        padding-top:3.5rem;
+        padding-left:4rem;
+        padding-right:4rem;
+        padding-bottom:3rem;
+        max-width:100%;
     }}
 
     /* =====================================================
-       NAVBAR
+       NAVBAR BRAND
        ===================================================== */
-
-    .churniq-navbar {{
-        width:100%;
-        display:flex;
-        align-items:center;
-        overflow:visible!important;
-    }}
 
     .brand-name {{
         font-size:27px;
         font-weight:800;
-        color:var(--text-color)!important;
         line-height:1.2;
-        white-space:nowrap!important;
-        overflow:visible!important;
-        padding-top:4px;
+        white-space:nowrap;
+        overflow:visible;
+        color:var(--brand-color) !important;
+    }}
+
+    .brand-name .iq {{
+        color:#60A5FA !important;
     }}
 
     .tagline {{
-        color:var(--muted-color)!important;
+        color:var(--muted-color) !important;
         font-size:13px;
-        margin-top:5px;
-        white-space:nowrap!important;
-        overflow:visible!important;
+        margin-top:6px;
+        white-space:nowrap;
+        overflow:visible;
     }}
 
-    /* Streamlit navigation buttons */
+    /* =====================================================
+       CUSTOM NAVIGATION
+       ===================================================== */
 
-    div[data-testid="stButton"] {{
-        width:100%!important;
-        overflow:visible!important;
+    .custom-nav {{
+        width:100%;
+        height:44px;
+
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        box-sizing:border-box;
+
+        margin:0;
+        padding:0;
+
+        overflow:visible;
     }}
 
-    div[data-testid="stButton"] > button {{
-        width:100%!important;
-        min-width:max-content!important;
-        min-height:44px!important;
-        padding:10px 14px!important;
-        border-radius:10px!important;
-        border:1px solid var(--border-color)!important;
-        background-color:var(--card-color)!important;
-        color:var(--nav-text)!important;
-        font-size:15px!important;
-        font-weight:600!important;
-        white-space:nowrap!important;
-        overflow:visible!important;
-        box-shadow:none!important;
+    .custom-nav a {{
+        width:100%;
+        height:44px;
+
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        box-sizing:border-box;
+
+        margin:0;
+        padding:0 12px;
+
+        border:none;
+        border-radius:10px;
+
+        background:transparent;
+
+        color:var(--nav-text) !important;
+
+        font-family:inherit;
+        font-size:15px;
+        font-weight:600;
+
+        line-height:1;
+
+        text-decoration:none !important;
+        white-space:nowrap;
+
+        transform:none !important;
+        position:relative;
+
+        box-shadow:none !important;
+
+        transition:
+            background-color .15s ease,
+            color .15s ease !important;
     }}
 
-    div[data-testid="stButton"] > button:hover {{
-        background-color:var(--hover-color)!important;
-        color:var(--accent-color)!important;
-        border-color:var(--accent-color)!important;
-        box-shadow:none!important;
+    .custom-nav a:hover {{
+        background-color:var(--hover-color);
+
+        color:var(--accent-color) !important;
+
+        transform:none !important;
+        position:relative;
+
+        box-shadow:none !important;
     }}
 
-    /* Active navigation item */
+    .custom-nav a:active {{
+        transform:none !important;
+        position:relative;
+        box-shadow:none !important;
+    }}
+
+    .custom-nav a:focus {{
+        outline:none !important;
+        box-shadow:none !important;
+    }}
+
+    .custom-nav a:visited {{
+        color:var(--nav-text) !important;
+    }}
+
+    .custom-nav a:hover:visited {{
+        color:var(--accent-color) !important;
+    }}
+
+    /* =====================================================
+       ACTIVE NAVIGATION
+       ===================================================== */
 
     .active-nav {{
         width:100%;
-        min-width:max-content;
-        min-height:44px;
+        height:44px;
+
         display:flex;
-        justify-content:center;
         align-items:center;
-        padding:10px 14px;
+        justify-content:center;
+
+        box-sizing:border-box;
+
+        margin:0;
+        padding:0 12px;
+
         border-radius:10px;
-        background-color:var(--hover-color);
-        border:1px solid var(--accent-color);
-        color:var(--accent-color)!important;
+
+        background:transparent;
+
+        color:var(--accent-color) !important;
+
         font-size:15px;
         font-weight:700;
-        white-space:nowrap!important;
-        overflow:visible!important;
-        box-sizing:border-box;
+
+        line-height:1;
+
+        white-space:nowrap;
+        overflow:visible;
+
+        transform:none !important;
     }}
 
-    /* Theme toggle */
+    /* =====================================================
+       THEME DIVIDER
+       ===================================================== */
 
-    div[data-testid="stToggle"] {{
-        display:flex!important;
-        justify-content:center!important;
-        align-items:center!important;
-    }}
-
-    div[data-testid="stToggle"] label {{
-        display:none!important;
-    }}
-
-    /* Navbar divider */
-
-    .nav-divider {{
+    .theme-divider {{
         width:1px;
         height:30px;
+
         background-color:var(--border-color);
+
         margin:auto;
+    }}
+
+    /* =====================================================
+       THEME TOGGLE
+       ===================================================== */
+
+    div[data-testid="stToggle"] {{
+        display:flex !important;
+        justify-content:center !important;
+        align-items:center !important;
+
+        visibility:visible !important;
+        opacity:1 !important;
+    }}
+
+    div[data-testid="stToggle"] > label {{
+        visibility:hidden !important;
+
+        width:0 !important;
+
+        margin:0 !important;
+        padding:0 !important;
+    }}
+
+    div[data-testid="stToggle"] [role="switch"] {{
+        width:46px !important;
+        min-width:46px !important;
+
+        height:24px !important;
+        min-height:24px !important;
+
+        background-color:var(--toggle-off) !important;
+
+        border:1px solid var(--border-color) !important;
+        border-radius:999px !important;
+
+        box-shadow:none !important;
+
+        visibility:visible !important;
+        opacity:1 !important;
+    }}
+
+    div[data-testid="stToggle"] [role="switch"][aria-checked="true"] {{
+        background-color:var(--accent-color) !important;
+        border-color:var(--accent-color) !important;
+    }}
+
+    div[data-testid="stToggle"] [role="switch"]::after {{
+        width:18px !important;
+        height:18px !important;
+
+        background-color:#FFFFFF !important;
+
+        visibility:visible !important;
+        opacity:1 !important;
+    }}
+
+    div[data-testid="stToggle"] [role="switch"]:hover {{
+        box-shadow:0 0 0 3px rgba(37,99,235,0.12) !important;
+    }}
+
+    /* =====================================================
+       PRIMARY BUTTONS
+       ===================================================== */
+
+    div.stButton > button[kind="primary"] {{
+        background-color:var(--accent-color) !important;
+        color:#FFFFFF !important;
+
+        border:1px solid var(--accent-color) !important;
+        border-radius:10px !important;
+
+        font-weight:700 !important;
+        min-height:46px;
+
+        transition:
+            background-color .2s ease,
+            border-color .2s ease,
+            box-shadow .2s ease !important;
+    }}
+
+    div.stButton > button[kind="primary"]:hover {{
+        background-color:#1D4ED8 !important;
+        border-color:#1D4ED8 !important;
+
+        box-shadow:0 6px 18px rgba(37,99,235,0.25);
+    }}
+
+    /* =====================================================
+       HEADER
+       ===================================================== */
+
+    header[data-testid="stHeader"] {{
+        background-color:transparent;
     }}
 
     /* =====================================================
        MOBILE
        ===================================================== */
 
-    @media(max-width:900px) {{
+    @media (max-width:900px) {{
 
         .block-container {{
-            padding-left:0.8rem!important;
-            padding-right:0.8rem!important;
+            padding-left:1.2rem;
+            padding-right:1.2rem;
         }}
 
         .brand-name {{
@@ -232,11 +388,12 @@ st.markdown(
             font-size:11px;
         }}
 
-        div[data-testid="stButton"] > button,
+        .custom-nav a,
         .active-nav {{
-            font-size:13px!important;
-            padding:8px 8px!important;
+            font-size:13px;
+            padding:0 6px;
         }}
+
     }}
 
     </style>
@@ -249,60 +406,109 @@ st.markdown(
 # =========================================================
 
 brand_col, home_col, predict_col, about_col, divider_col, theme_col = st.columns(
-    [3.4, 1.05, 1.65, 1.05, 0.2, 0.65],
+    [2.8, 1.1, 1.4, 1.1, 0.25, 0.7],
     vertical_alignment="center"
 )
+
+# =========================================================
+# BRAND
+# =========================================================
 
 with brand_col:
     st.markdown(
         """
-        <div class="churniq-navbar">
-            <div>
-                <div class="brand-name">ChurnIQ</div>
-                <div class="tagline">AI-Powered Churn Intelligence</div>
-            </div>
+        <div class="brand-name">
+            Churn<span class="iq">IQ</span>
+        </div>
+        <div class="tagline">
+            AI-Powered Churn Intelligence
         </div>
         """,
         unsafe_allow_html=True
     )
 
+# =========================================================
+# CURRENT PAGE
+# =========================================================
+
 current_page = pg.url_path if hasattr(pg, "url_path") else ""
 
+# =========================================================
+# HOME
+# =========================================================
+
 with home_col:
+
     if current_page.endswith("home") or current_page == "":
         st.markdown(
-            '<div class="active-nav">Home</div>',
+            '<div class="active-nav">🏠&nbsp; Home</div>',
             unsafe_allow_html=True
         )
     else:
-        if st.button("Home", key="nav_home"):
-            st.switch_page("pages/home.py")
+        st.markdown(
+            """
+            <div class="custom-nav">
+                <a href="/home">🏠&nbsp; Home</a>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+# =========================================================
+# PREDICT CHURN
+# =========================================================
 
 with predict_col:
+
     if current_page.endswith("predict"):
         st.markdown(
-            '<div class="active-nav">Predict Churn</div>',
+            '<div class="active-nav">🎯&nbsp; Predict Churn</div>',
             unsafe_allow_html=True
         )
     else:
-        if st.button("Predict Churn", key="nav_predict"):
-            st.switch_page("pages/predict.py")
+        st.markdown(
+            """
+            <div class="custom-nav">
+                <a href="/predict">🎯&nbsp; Predict Churn</a>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+# =========================================================
+# ABOUT
+# =========================================================
 
 with about_col:
+
     if current_page.endswith("about"):
         st.markdown(
-            '<div class="active-nav">About</div>',
+            '<div class="active-nav">ℹ️&nbsp; About</div>',
             unsafe_allow_html=True
         )
     else:
-        if st.button("About", key="nav_about"):
-            st.switch_page("pages/about.py")
+        st.markdown(
+            """
+            <div class="custom-nav">
+                <a href="/about">ℹ️&nbsp; About</a>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+# =========================================================
+# DIVIDER
+# =========================================================
 
 with divider_col:
     st.markdown(
-        '<div class="nav-divider"></div>',
+        '<div class="theme-divider"></div>',
         unsafe_allow_html=True
     )
+
+# =========================================================
+# THEME TOGGLE
+# =========================================================
 
 with theme_col:
     st.toggle(

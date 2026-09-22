@@ -756,9 +756,10 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
 st.markdown(
     """
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
     <div class="section-heading">
     <h2>How It Works</h2>
     <p>A simple, end-to-end machine learning pipeline.</p>
@@ -768,7 +769,7 @@ st.markdown(
 
     <div class="step-card">
     <div class="step-number">01</div>
-    <div class="step-icon">👤</div>
+    <div class="step-icon"><span class="material-symbols-outlined">person</span></div>
     <h3>Customer Data</h3>
     <p>
     You enter individual customer information through the application.
@@ -777,7 +778,7 @@ st.markdown(
 
     <div class="step-card">
     <div class="step-number">02</div>
-    <div class="step-icon">🗄️</div>
+    <div class="step-icon"><span class="material-symbols-outlined">database</span></div>
     <h3>FastAPI</h3>
     <p>
     The data is sent to the FastAPI backend for processing.
@@ -786,7 +787,7 @@ st.markdown(
 
     <div class="step-card">
     <div class="step-number">03</div>
-    <div class="step-icon">🧠</div>
+    <div class="step-icon"><span class="material-symbols-outlined">psychology</span></div>
     <h3>LightGBM</h3>
     <p>
     The trained model predicts the customer's churn probability.
@@ -795,7 +796,7 @@ st.markdown(
 
     <div class="step-card">
     <div class="step-number">04</div>
-    <div class="step-icon">📊</div>
+    <div class="step-icon"><span class="material-symbols-outlined">query_stats</span></div>
     <h3>Risk Result</h3>
     <p>
     You get a clear result with probability, risk level and future key factors.
@@ -870,6 +871,8 @@ st.markdown(
 
 st.markdown(
     """
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
     <div class="roadmap">
 
     <div>
@@ -897,27 +900,27 @@ st.markdown(
     <div class="roadmap-flow">
 
     <div class="roadmap-step">
-    <span class="roadmap-step-icon">📊</span>
+    <span class="roadmap-step-icon"><span class="material-symbols-outlined">query_stats</span></span>
     Churn Prediction
     </div>
 
     <div class="roadmap-step">
-    <span class="roadmap-step-icon">🔍</span>
+    <span class="roadmap-step-icon"><span class="material-symbols-outlined">troubleshoot</span></span>
     SHAP / Key Factors
     </div>
 
     <div class="roadmap-step">
-    <span class="roadmap-step-icon">📄</span>
+    <span class="roadmap-step-icon"><span class="material-symbols-outlined">description</span></span>
     Company Policies
     </div>
 
     <div class="roadmap-step active">
-    <span class="roadmap-step-icon">🧠</span>
+    <span class="roadmap-step-icon"><span class="material-symbols-outlined">smart_toy</span></span>
     LLM + RAG
     </div>
 
     <div class="roadmap-step">
-    <span class="roadmap-step-icon">💡</span>
+    <span class="roadmap-step-icon"><span class="material-symbols-outlined">lightbulb</span></span>
     Retention Recommendation
     </div>
 

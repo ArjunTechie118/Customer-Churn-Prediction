@@ -31,19 +31,18 @@ def toggle_theme():
 home_page = st.Page(
     "pages/home.py",
     title="Home",
-    icon="🏠"
+    icon=":material/home:"
 )
 
 predict_page = st.Page(
     "pages/predict.py",
     title="Predict Churn",
-    icon="🎯"
+    icon=":material/query_stats:"
 )
 
 about_page = st.Page(
     "pages/about.py",
-    title="About",
-    icon="ℹ️"
+    title="About"
 )
 
 pg = st.navigation(
@@ -394,7 +393,7 @@ with brand_col:
 
 with home_col:
     if st.button(
-        "🏠  Home",
+        "Home",
         key="nav_home",
         use_container_width=True
     ):
@@ -406,7 +405,7 @@ with home_col:
 
 with predict_col:
     if st.button(
-        "🎯  Predict Churn",
+        "Predict Churn",
         key="nav_predict",
         use_container_width=True
     ):
@@ -418,7 +417,7 @@ with predict_col:
 
 with about_col:
     if st.button(
-        "ℹ️  About",
+        "About",
         key="nav_about",
         use_container_width=True
     ):

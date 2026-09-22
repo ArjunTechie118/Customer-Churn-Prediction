@@ -637,7 +637,7 @@ col1,col2,col3=st.columns([1,1.4,1])
 
 with col2:
     predict_button=st.button(
-        "🎯 Predict Churn",
+        "Predict Churn",
         type="primary",
         use_container_width=True
     )

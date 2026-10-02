@@ -672,7 +672,7 @@ if predict_button:
             response=requests.post(
                 API_URL,
                 json=payload,
-                timeout=30
+                timeout=90
             )
 
             if response.status_code==200:
